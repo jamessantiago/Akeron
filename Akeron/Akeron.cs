@@ -7,6 +7,8 @@ namespace Modules
 {
     public class Akeron : IHttpModule, IDisposable
     {
+        //TODO: inject running config model (ADO.NET/dataset)
+
         #region IHttpModule Members
 
         public void Init(HttpApplication application)
