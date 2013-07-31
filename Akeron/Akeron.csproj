@@ -8,8 +8,8 @@
     <ProjectGuid>{CF1AA814-AA4E-4843-8420-CC15038517E2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyIIS7Modules</RootNamespace>
-    <AssemblyName>MyIIS7Module</AssemblyName>
+    <RootNamespace>Styx</RootNamespace>
+    <AssemblyName>Akeron</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -49,6 +49,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.2.0.1.2\lib\net20\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
@@ -56,9 +59,57 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Akeron.cs" />
+    <Compile Include="Guards\Guard.cs" />
+    <Compile Include="Models\ConfigSet.cs">
+      <DependentUpon>ConfigSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Models\ConfigSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfigSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataManager.cs" />
+    <Compile Include="Models\WorkingSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkingSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="NLog.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>NLog.config</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Models\ConfigSet.xsc">
+      <DependentUpon>ConfigSet.xsd</DependentUpon>
+    </None>
+    <None Include="Models\ConfigSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ConfigSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Models\ConfigSet.xss">
+      <DependentUpon>ConfigSet.xsd</DependentUpon>
+    </None>
+    <None Include="Models\WorkingSet.xsc">
+      <DependentUpon>WorkingSet.xsd</DependentUpon>
+    </None>
+    <None Include="Models\WorkingSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WorkingSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Models\WorkingSet.xss">
+      <DependentUpon>WorkingSet.xsd</DependentUpon>
+    </None>
+    <None Include="NLog.config">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>NLog.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
     <None Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -73,9 +124,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

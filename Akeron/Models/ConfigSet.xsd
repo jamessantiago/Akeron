@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ConfigSet" targetNamespace="http://tempuri.org/ConfigSet.xsd" xmlns:mstns="http://tempuri.org/ConfigSet.xsd" xmlns="http://tempuri.org/ConfigSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ConfigSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ConfigSet" msprop:Generator_UserDSName="ConfigSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Global" msprop:Generator_TableClassName="GlobalDataTable" msprop:Generator_TableVarName="tableGlobal" msprop:Generator_TablePropName="Global" msprop:Generator_RowDeletingName="GlobalRowDeleting" msprop:Generator_RowChangingName="GlobalRowChanging" msprop:Generator_RowEvHandlerName="GlobalRowChangeEventHandler" msprop:Generator_RowDeletedName="GlobalRowDeleted" msprop:Generator_UserTableName="Global" msprop:Generator_RowChangedName="GlobalRowChanged" msprop:Generator_RowEvArgName="GlobalRowChangeEvent" msprop:Generator_RowClassName="GlobalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IsActiveIds" msprop:Generator_ColumnVarNameInTable="columnIsActiveIds" msprop:Generator_ColumnPropNameInRow="IsActiveIds" msprop:Generator_ColumnPropNameInTable="IsActiveIdsColumn" msprop:Generator_UserColumnName="IsActiveIds" type="xs:boolean" default="false" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="IpAccessList" msprop:Generator_TableClassName="IpAccessListDataTable" msprop:Generator_TableVarName="tableIpAccessList" msprop:Generator_TablePropName="IpAccessList" msprop:Generator_RowDeletingName="IpAccessListRowDeleting" msprop:Generator_RowChangingName="IpAccessListRowChanging" msprop:Generator_RowEvHandlerName="IpAccessListRowChangeEventHandler" msprop:Generator_RowDeletedName="IpAccessListRowDeleted" msprop:Generator_UserTableName="IpAccessList" msprop:Generator_RowChangedName="IpAccessListRowChanged" msprop:Generator_RowEvArgName="IpAccessListRowChangeEvent" msprop:Generator_RowClassName="IpAccessListRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OrderId" msprop:Generator_ColumnVarNameInTable="columnOrderId" msprop:Generator_ColumnPropNameInRow="OrderId" msprop:Generator_ColumnPropNameInTable="OrderIdColumn" msprop:Generator_UserColumnName="OrderId" type="xs:string" minOccurs="0" />
+              <xs:element name="IP" msprop:Generator_ColumnVarNameInTable="columnIP" msprop:Generator_ColumnPropNameInRow="IP" msprop:Generator_ColumnPropNameInTable="IPColumn" msprop:Generator_UserColumnName="IP" type="xs:string" minOccurs="0" />
+              <xs:element name="Mask" msprop:Generator_ColumnVarNameInTable="columnMask" msprop:Generator_ColumnPropNameInRow="Mask" msprop:Generator_ColumnPropNameInTable="MaskColumn" msprop:Generator_UserColumnName="Mask" type="xs:string" minOccurs="0" />
+              <xs:element name="Location" msprop:Generator_ColumnVarNameInTable="columnLocation" msprop:Generator_ColumnPropNameInRow="Location" msprop:Generator_ColumnPropNameInTable="LocationColumn" msprop:Generator_UserColumnName="Location" type="xs:string" minOccurs="0" />
+              <xs:element name="Action" msprop:Generator_ColumnVarNameInTable="columnAction" msprop:Generator_ColumnPropNameInRow="Action" msprop:Generator_ColumnPropNameInTable="ActionColumn" msprop:Generator_UserColumnName="Action" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
