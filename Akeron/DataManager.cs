@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Text.RegularExpressions;
 using Styx.Models;
+using Styx.Util;
 using NLog;
 
 namespace Styx
@@ -32,32 +34,50 @@ namespace Styx
 
         #endregion
 
-        #region private properties
+        #region Private Properties
+        private Logger logger = LogManager.GetLogger("DataManager");
+        #endregion
 
+        #region Public Properties
         public ConfigSet configSet = new ConfigSet();
         public WorkingSet workingSet = new WorkingSet();
-        private Logger logger = LogManager.GetLogger("DataManager");
-
         #endregion
 
         private DataManager() 
         {
-            //read xml files
+            //TODO: read xml files
 
-            //track xml files
+            //TODO: track xml files
         }
 
         #region Configuration Repository
 
-        public bool IsActiveIds()
-        {
-            return (bool)configSet.Global.Rows[0][configSet.Global.IsActiveIdsColumn];
-        }
-
         public string GetAclAction(string ClientIp, string RequestedLocation)
         {
-            return "Deny";
+            //TODO: add time limitation to acls
+            var acls = configSet.IpAccessList.Select("", "OrderId ASC");
+            foreach (var acl in acls)
+            {
+                string ip = acl[configSet.IpAccessList.IPColumn] as string;
+                string mask = acl[configSet.IpAccessList.MaskColumn] as string;
+                string location = acl[configSet.IpAccessList.LocationColumn] as string;
+                string action = acl[configSet.IpAccessList.ActionColumn] as string;
+
+                if (StringUtil.IsNotNullOrEmpty(ip, mask, location, action))
+                {
+                    bool ipMatches = IpUtil.IsInIpRange(ClientIp, ip, mask);
+                    bool locationMatches = Regex.IsMatch(RequestedLocation, location);
+
+                    if (ipMatches && locationMatches)
+                    {
+                        return action;
+                    }
+                }
+            }
+            return "Permit";
         }
+
+        //TODO: add dispose method to write to xml files (research)
 
         #endregion
     }

@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 using System.Data;
+using Styx.Guards;
 using NLog;
 
 namespace Styx
 {
+    //TODO: Add test project
+
     public class Akeron : IHttpModule, IDisposable
     {
         #region Private Properties
 
         private Logger logger = LogManager.GetLogger("Akeron");        
 
-        private delegate void RequestVerifier(HttpContext context);
-
-        //TODO: inject running config model (ADO.NET/dataset)        
+        private delegate void RequestVerifier(ref ContextWrapper wrapper);
 
         #endregion        
 
@@ -26,7 +27,7 @@ namespace Styx
             //see http://support.microsoft.com/kb/307985 for event descriptions
 
             application.BeginRequest += new EventHandler(OnBeginRequest);
-            // TODO: add additional application event handlers here
+            application.EndRequest += new EventHandler(OnEndRequest);
         }
         
         #endregion
@@ -37,10 +38,23 @@ namespace Styx
         {
 
             HttpApplication app = (HttpApplication)source;
+            ContextWrapper wrapper = new ContextWrapper()
+            {
+                context = app.Context,
+                IsCompleted = false
+            };
+
+            RequestVerifier checkClientIp = new RequestVerifier(AclGuard.CheckClientIp);
+
+            //TODO: add full set of guard checks
+        }
+
+        public void OnEndRequest(Object source, EventArgs e)
+        {
+            HttpApplication app = (HttpApplication)source;
             HttpContext context = app.Context;
 
-
-            // TODO: implement module functionality here
+            //TODO: add post response checks
         }
 
         #endregion
@@ -62,7 +76,7 @@ namespace Styx
         {
             if (disposing)
             {
-                //TODO track objects requiring disposal
+                //nothing to dispose so far
             }
         }
 

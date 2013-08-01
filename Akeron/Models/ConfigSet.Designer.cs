@@ -314,8 +314,6 @@ namespace Styx.Models {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class GlobalDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
             
-            private global::System.Data.DataColumn columnIsActiveIds;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public GlobalDataTable() {
@@ -347,14 +345,6 @@ namespace Styx.Models {
             protected GlobalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn IsActiveIdsColumn {
-                get {
-                    return this.columnIsActiveIds;
-                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -394,10 +384,9 @@ namespace Styx.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public GlobalRow AddGlobalRow(bool IsActiveIds) {
+            public GlobalRow AddGlobalRow() {
                 GlobalRow rowGlobalRow = ((GlobalRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        IsActiveIds};
+                object[] columnValuesArray = new object[0];
                 rowGlobalRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowGlobalRow);
                 return rowGlobalRow;
@@ -426,16 +415,11 @@ namespace Styx.Models {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
-                this.columnIsActiveIds = base.Columns["IsActiveIds"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnIsActiveIds = new global::System.Data.DataColumn("IsActiveIds", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIsActiveIds);
-                this.columnIsActiveIds.AllowDBNull = false;
-                this.columnIsActiveIds.DefaultValue = ((bool)(false));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -883,17 +867,6 @@ namespace Styx.Models {
             internal GlobalRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
                 this.tableGlobal = ((GlobalDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsActiveIds {
-                get {
-                    return ((bool)(this[this.tableGlobal.IsActiveIdsColumn]));
-                }
-                set {
-                    this[this.tableGlobal.IsActiveIdsColumn] = value;
-                }
             }
         }
         

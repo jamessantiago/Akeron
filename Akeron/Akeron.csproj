@@ -81,6 +81,8 @@
       <DependentUpon>NLog.config</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\IpUtil.cs" />
+    <Compile Include="Util\StringUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\ConfigSet.xsc">
