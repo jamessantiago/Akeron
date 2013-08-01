@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Text.RegularExpressions;
+using System.IO;
 using Styx.Models;
 using Styx.Util;
 using NLog;
 
 namespace Styx
 {
-    public sealed class DataManager
+    public sealed class DataManager : IDisposable
     {
 
         #region Singleton Constructor
@@ -45,10 +46,27 @@ namespace Styx
 
         private DataManager() 
         {
-            //TODO: read xml files
+            configSet.ReadXml("Configuration.xml");
+            workingSet.ReadXml("WorkingData.xml");
 
-            //TODO: track xml files
+            FileSystemWatcher configWatcher = new FileSystemWatcher();
+            configWatcher.NotifyFilter = NotifyFilters.LastWrite;
+            configWatcher.Filter = "Configuration.xml";
+            configWatcher.Changed += new FileSystemEventHandler(OnConfigChanged);
+            configWatcher.EnableRaisingEvents = true;            
         }
+
+        #region File Watcher Events
+
+        private void OnConfigChanged(object source, FileSystemEventArgs e)
+        {
+            lock (SyncLocks.ConfigSetSync)
+            {
+                configSet.ReadXml("Configuration.xml");
+            }
+        }        
+
+        #endregion
 
         #region Configuration Repository
 
@@ -76,10 +94,36 @@ namespace Styx
             }
             return "Permit";
         }
-
-        //TODO: add dispose method to write to xml files (research)
-
         #endregion
+
+        #region Dispose
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~DataManager()
+        {
+            Dispose(false);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                configSet.WriteXml("Configuration.xml");
+                configSet.Dispose();
+                configSet = null;
+
+                workingSet.WriteXml("Configuration.xml");
+                workingSet.Dispose();
+                workingSet = null;
+            }
+        }
+
+        #endregion Dispose
     }
 
     

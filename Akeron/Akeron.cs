@@ -8,8 +8,6 @@ using NLog;
 
 namespace Styx
 {
-    //TODO: Add test project
-
     public class Akeron : IHttpModule, IDisposable
     {
         #region Private Properties
@@ -86,6 +84,8 @@ namespace Styx
     public static class SyncLocks
     {
         public static object ContextSync = new object();
+        public static object ConfigSetSync = new object();
+        public static object WorkingSetSync = new object();
     }
 
     public class ContextWrapper
