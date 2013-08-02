@@ -24,8 +24,15 @@ namespace Styx
         {
             //see http://support.microsoft.com/kb/307985 for event descriptions
 
+            logger.Trace("Init called, creating event handlers");
+            application.Error += application_Error;
             application.BeginRequest += new EventHandler(OnBeginRequest);
             application.EndRequest += new EventHandler(OnEndRequest);
+        }
+
+        private void application_Error(object sender, EventArgs e)
+        {
+            logger.ErrorException("An error occured", (Exception)sender);
         }
         
         #endregion
@@ -33,15 +40,14 @@ namespace Styx
         #region Module Event Handlers
 
         public void OnBeginRequest(Object source, EventArgs e)
-        {
-
+        {   
             HttpApplication app = (HttpApplication)source;
             ContextWrapper wrapper = new ContextWrapper()
             {
                 context = app.Context,
                 IsCompleted = false
             };
-
+            logger.Trace("Request started from " + wrapper.context.Request.UserHostAddress);
             RequestVerifier checkClientIp = new RequestVerifier(AclGuard.CheckClientIp);
 
             //TODO: add full set of guard checks
@@ -49,6 +55,7 @@ namespace Styx
 
         public void OnEndRequest(Object source, EventArgs e)
         {
+            logger.Trace("Request ended");
             HttpApplication app = (HttpApplication)source;
             HttpContext context = app.Context;
 
